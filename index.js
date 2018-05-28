@@ -3,15 +3,15 @@ const express = require('express');
 const socket = require('socket.io');
 const redis = require('ioredis');
 
-const redisUrl = "redis://h:p774c4025e8b03e0df720e726bb1d94b346479e8e023d96f2a4c151199cf470f9@ec2-52-73-203-82.compute-1.amazonaws.com:9529";
+const redisUrl = 'redis://h:p774c4025e8b03e0df720e726bb1d94b346479e8e023d96f2a4c151199cf470f9@ec2-52-73-203-82.compute-1.amazonaws.com:9529';
 const port = process.env.PORT || 3001;
 
 const app = express();
 const server = app.listen(port, console.log(`Server listening at PORT:${port}`));
 
-const redisClient = redis.createClient(redisUrl);
-const pub = redis.createClient();   //Redis Publisher
-const sub = redis.createClient();   //Redis Subscriber
+const redisClient = new redis(redisUrl);
+const pub = new redis(redisUrl);   //Redis Publisher
+const sub = new redis(redisUrl);   //Redis Subscriber
 
 //Subscribe to channel name global
 sub.subscribe('global');
